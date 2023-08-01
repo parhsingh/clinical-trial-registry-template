@@ -1,0 +1,196 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	<h1 style="margin-bottom: 40px;">Search Trials</h1>
+	{% if trials %}
+	<div class="search-container">
+		<div class="row">
+			<div class="col-2">
+				<div class="width-restrction">
+					{% for trial in trials %}
+						{% if not forloop.counter|divisibleby:2 %}
+							<div class="card">
+								<h2>{{ trial.public_title_of_study }}</h2>
+								<p><strong>Identifying Number: </strong>{{ trial.primary_registry_identifying_number }}</p>
+								<p><strong>Date of Registration: </strong>{{ trial.date_of_registration_primary_registry }}</p>
+								<p><strong>Type of Study: </strong>{{ trial.type_of_study }}</p>
+								<h3>Principal Investigator Details</h3>
+								<p><strong>Name: </strong>{{ trial.principal_investigator_name }}</p>
+								<p><strong>Address: </strong>{{ trial.principal_investigator_address }}</p>
+							</div>
+						{% endif %}
+					{% endfor %}
+				</div>
+			</div>
+			<div class="col-2">
+				<div class="width-retriction">
+					{% for trial in trials %}
+						{% if forloop.counter|divisibleby:2 %}
+							<div class="card">
+								<h2>{{ trial.public_title_of_study }}</h2>
+								<p><strong>Identifying Number: </strong>{{ trial.primary_registry_identifying_number }}</p>
+								<p><strong>Date of Registration: </strong>{{ trial.date_of_registration_primary_registry }}</p>
+								<p><strong>Type of Study: </strong>{{ trial.type_of_study }}</p>
+								<h3>Principal Investigator Details</h3>
+								<p><strong>Name: </strong>{{ trial.principal_investigator_name }}</p>
+								<p><strong>Address: </strong>{{ trial.principal_investigator_address }}</p>
+							</div>
+						{% endif %}
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+		<!-- <table>
+			<thead>
+				<tr>
+					<th>Primary Registry Identifying Number</th>
+					<th>Date of Registration</th>
+					<th>Post Graduate Thesis</th>
+					<th>Type of Trial</th>
+					<th>Type of Study</th>
+					<th>Study Design</th>
+					<th>Public Title of Study</th>
+					<th>Scientific Title of Study</th>
+					<th>Secondary ID</th>
+					<th>Secondary Registry</th>
+					<th>Principal Investigator Name</th>
+					<th>Principal Investigator Address</th>
+					<th>Principal Investigator Phone</th>
+					<th>Principal Investigator Email</th>
+					<th>Scientific Query Contact Name</th>
+					<th>Scientific Query Contact Address</th>
+					<th>Scientific Query Contact Phone</th>
+					<th>Scientific Query Contact Email</th>
+					<th>Public Query Contact Name</th>
+					<th>Public Query Contact Address</th>
+					<th>Public Query Contact Phone</th>
+					<th>Public Query Contact Email</th>
+					<th>Source of Monetary or Material Support</th>
+					<th>Primary Sponsor Name</th>
+					<th>Primary Sponsor Address</th>
+					<th>Primary Sponsor Type</th>
+					<th>Secondary Sponsor Name</th>
+					<th>Secondary Sponsor Address</th>
+					<th>Countries of Recruitment</th>
+					<th>Sites of Study Contact Person</th>
+					<th>Sites of Study Name</th>
+					<th>Sites of Study Address</th>
+					<th>Sites of Study Phone</th>
+					<th>Sites of Study Email</th>
+					<th>Ethics Committee Name</th>
+					<th>Ethics Committee Approval Status</th>
+					<th>Regulatory Clearance Status</th>
+					<th>Health Conditions Studied Type</th>
+					<th>Health Conditions Studied Condition</th>
+					<th>Intervention Comparator Agent Type</th>
+					<th>Intervention Comparator Agent Name</th>
+					<th>Intervention Comparator Agent Details</th>
+					<th>Inclusion Criteria</th>
+					<th>Exclusion Criteria</th>
+					<th>Random Sequence Generation Method</th>
+					<th>Concealment Method</th>
+					<th>Blinding/Masking</th>
+					<th>Primary Outcome Details</th>
+					<th>Primary Outcome Timepoints</th>
+					<th>Secondary Outcome Details</th>
+					<th>Secondary Outcome Timepoints</th>
+					<th>Target Sample Size</th>
+					<th>Phase of Trial</th>
+					<th>Date of First Enrollment (India)</th>
+					<th>Date of First Enrollment (Global)</th>
+					<th>Estimated Duration of Trial (Years)</th>
+					<th>Estimated Duration of Trial (Months)</th>
+					<th>Estimated Duration of Trial (Days)</th>
+					<th>Recruitment Status (Global)</th>
+					<th>Recruitment Status (India)</th>
+					<th>Publication Details</th>
+					<th>Brief Summary</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for trial in trials %}
+					<tr>
+						<td>{{ trial.primary_registry_identifying_number }}</td>
+						<td>{{ trial.date_of_registration_primary_registry }}</td>
+						<td>{{ trial.post_graduate_thesis }}</td>
+						<td>{{ trial.type_of_trial }}</td>
+						<td>{{ trial.type_of_study }}</td>
+						<td>{{ trial.study_design }}</td>
+						<td>{{ trial.public_title_of_study }}</td>
+						<td>{{ trial.scientific_title_of_study }}</td>
+						<td>{{ trial.secondary_id }}</td>
+						<td>{{ trial.secondary_registry }}</td>
+						<td>{{ trial.principal_investigator_name }}</td>
+						<td>{{ trial.principal_investigator_address }}</td>
+						<td>{{ trial.principal_investigator_phone }}</td>
+						<td>{{ trial.principal_investigator_email }}</td>
+						<td>{{ trial.scientific_query_contact_name }}</td>
+						<td>{{ trial.scientific_query_contact_address }}</td>
+						<td>{{ trial.scientific_query_contact_phone }}</td>
+						<td>{{ trial.scientific_query_contact_email }}</td>
+						<td>{{ trial.public_query_contact_name }}</td>
+						<td>{{ trial.public_query_contact_address }}</td>
+						<td>{{ trial.public_query_contact_phone }}</td>
+						<td>{{ trial.public_query_contact_email }}</td>
+						<td>{{ trial.source_of_monetary_or_material_support }}</td>
+						<td>{{ trial.primary_sponsor_name }}</td>
+						<td>{{ trial.primary_sponsor_address }}</td>
+						<td>{{ trial.primary_sponsor_type }}</td>
+						<td>{{ trial.secondary_sponsor_name }}</td>
+						<td>{{ trial.secondary_sponsor_address }}</td>
+						<td>{{ trial.countries_of_recruitment }}</td>
+						<td>{{ trial.sites_of_study_contact_person }}</td>
+						<td>{{ trial.sites_of_study_name }}</td>
+						<td>{{ trial.sites_of_study_address }}</td>
+						<td>{{ trial.sites_of_study_phone }}</td>
+						<td>{{ trial.sites_of_study_email }}</td>
+						<td>{{ trial.ethics_committee_name }}</td>
+						<td>{{ trial.ethics_committee_approval_status }}</td>
+						<td>{{ trial.regulatory_clearance_status }}</td>
+						<td>{{ trial.health_conditions_studied_type }}</td>
+						<td>{{ trial.health_conditions_studied_condition }}</td>
+						<td>{{ trial.intervention_comparator_agent_type }}</td>
+						<td>{{ trial.intervention_comparator_agent_name }}</td>
+						<td>{{ trial.intervention_comparator_agent_details }}</td>
+						<td>{{ trial.inclusion_criteria }}</td>
+						<td>{{ trial.exclusion_criteria }}</td>
+						<td>{{ trial.random_sequence_generation_method }}</td>
+						<td>{{ trial.concealment_method }}</td>
+						<td>{{ trial.blinding_masking }}</td>
+						<td>{{ trial.primary_outcome_details }}</td>
+						<td>{{ trial.primary_outcome_timepoints }}</td>
+						<td>{{ trial.secondary_outcome_details }}</td>
+						<td>{{ trial.secondary_outcome_timepoints }}</td>
+						<td>{{ trial.target_sample_size }}</td>
+						<td>{{ trial.phase_of_trial }}</td>
+						<td>{{ trial.date_of_first_enrollment_india }}</td>
+						<td>{{ trial.date_of_first_enrollment_global }}</td>
+						<td>{{ trial.estimated_duration_of_trial_years }}</td>
+						<td>{{ trial.estimated_duration_of_trial_months }}</td>
+						<td>{{ trial.estimated_duration_of_trial_days }}</td>
+						<td>{{ trial.recruitment_status_global }}</td>
+						<td>{{ trial.recruitment_status_india }}</td>
+						<td>{{ trial.publication_details }}</td>
+						<td>{{ trial.brief_summary }}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table> -->
+	</div>
+	{% else %}
+		<p>No trials found in the database.</p>
+	{% endif %}
+	<style>
+		h2  {
+			margin-top: 0;
+			margin-bottom: 15px;
+		}
+		h3 {
+			margin-bottom: 10px;
+		}
+		.search-container p {
+			margin-top: 0;
+			margin-bottom: 5px;
+		}
+	</style>
+{% endblock %}

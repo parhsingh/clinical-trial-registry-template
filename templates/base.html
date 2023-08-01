@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>Clinical Trial Registry | ICMR</title>
+
+		<!-- Meta tags for screen viewport -->
+		<meta name="charset" content="utf-8" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="language" content="English" />
+		<meta meta="meta" name="theme-color" content="#ffffff" />
+		<meta name="msapplication-TileColor" content="#ffffff" />
+		<meta name="author" content="Krish Goel" />
+		<link rel="me" href="https://krishgoel.com" type="text/html" />
+		<base href="/" />
+
+		{% load static %}
+		
+		<link rel="stylesheet" href="{% static 'css/main.css' %}" />
+		<link rel="stylesheet" href="{% static 'css/grid.css' %}" />
+
+		<!-- Icons -->
+		<link href="{% static 'images/icons/favicon.png' %}" rel="shortcut icon" type="image/png">
+		<link href="{% static 'images/icons/favicon.png' %}" rel="icon" type="image/png">
+		<link href="{% static 'images/icons/apple-touch-icon-180x180.png' %}" rel="icon" sizes="180x180" type="image/png">
+		<link href="{% static 'images/icons/apple-touch-icon-152x152.png' %}" rel="icon" sizes="152x152" type="image/png">
+		<link href="{% static 'images/icons/safari-pinned-tab.svg' %}" rel="mask-icon">
+		<link href="{% static 'images/icons/apple-touch-icon.png' %}" rel="apple-touch-icon">
+		<link href="{% static 'images/icons/apple-touch-icon-57x57.png' %}" rel="apple-touch-icon" sizes="57x57">
+		<link href="{% static 'images/icons/apple-touch-icon-72x72.png' %}" rel="apple-touch-icon" sizes="72x72">
+		<link href="{% static 'images/icons/apple-touch-icon-76x76.png' %}" rel="apple-touch-icon" sizes="76x76">
+		<link href="{% static 'images/icons/apple-touch-icon-114x114.png' %}" rel="apple-touch-icon" sizes="114x114">
+		<link href="{% static 'images/icons/apple-touch-icon-120x120.png' %}" rel="apple-touch-icon" sizes="120x120">
+		<link href="{% static 'images/icons/apple-touch-icon-144x144.png' %}" rel="apple-touch-icon" sizes="144x144">
+		<link href="{% static 'images/icons/apple-touch-icon-152x152.png' %}" rel="apple-touch-icon" sizes="152x152">
+		<link href="{% static 'images/icons/apple-touch-icon-180x180.png' %}" rel="apple-touch-icon" sizes="180x180">
+
+	</head>
+	<body>
+		<nav>
+			<div class="width-restriction">
+				<div class="wrapper">
+					<a href="/" style="display: flex; justify-content: space-between; align-items: center;">
+						<img src="{% static 'images/icmr.png' %}" alt="Search Trials" style="width: 100%; max-width: 80px;" />
+						<h1 style="margin-left: 10px">Clinical Trial Registry</h1>
+					</a>
+					<div class="links">
+						<a href="/search">
+							<p>Search Trials</p>
+						</a>
+						{% if user.is_authenticated %}
+							<a href="/dashboard">
+								<p>Dashboard</p>
+							</a>
+							<a href="{% url 'userauth:logout' %}">Logout</a>
+						{% else %}
+							<a href="/login">
+								<p>Login/Signup</p>
+							</a>
+						{% endif %}
+					</div>
+					<a href="javascript:void(0)" id="menuTrigger" onclick="toggleMenu()">[Menu]</a>
+				</div>
+				<div id="sidebar" style="display: none;">
+					<a href="/search">
+						<p>Search Trials</p>
+					</a>
+					{% if user.is_authenticated %}
+						<a href="/dashboard">
+							<p>Dashboard</p>
+						</a>
+						<a href="{% url 'userauth:logout' %}"><p>Logout</p></a>
+					{% else %}
+						<a href="/login">
+							<p>Login/Signup</p>
+						</a>
+					{% endif %}
+				</div>
+			</div>
+		</nav>
+		<script>
+			function toggleMenu() {
+			    var menu = document.getElementById("sidebar");
+			    if (menu.style.display == "block") {
+			        menu.style.display = "none";
+			    } else {
+			        menu.style.display = "block";
+			    }
+			}
+		</script>
+		<div class="width-restriction injected-content" style="margin-top: 100px">
+			{% block content %}
+			{% endblock %}
+		</div>
+		<footer>
+			<div class="width-restriction">
+				<div class="wrapper">
+					<a href="https://www.icmr.gov.in/" target="_blank" style="max-width: 70%"><p>&copy; Designed and Developed by BMI, ICMR New Delhi</p></a>
+					<div class="links">
+						<a href="/contact"><p>Contact</p></a>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</body>
+</html>

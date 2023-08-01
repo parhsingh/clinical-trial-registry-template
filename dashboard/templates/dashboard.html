@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	{% if user.is_authenticated %}
+		<div class="notifications">
+			{% for notification in notifications %}
+				<p>{{ notification }}</p>
+			{% endfor %}
+		</div>
+		<div class="row">
+			<div class="col-2">
+				<h3 style="font-weight: 400; margin-bottom: 5px;">Welcome,</h3>
+				<h1 style="margin-top: 0;">{{ user.first_name }} {{ user.last_name }}</h1>
+				<p><strong>Email:</strong> {{ user.email }}</p>
+				<p><strong>Organisation:</strong> {{ user.organisation }}</p>
+			</div>
+			<div class="col-2">
+				{% if user.access %}
+					<h2>Your Registered Trials</h2>
+					{% if registeredTrials %}
+						{% for trial in registeredTrials %}
+							<li>{{ trial }}</li>
+						{% endfor %}
+					{% else %}
+						<p>You have no clinical trials yet.</p>
+					{% endif %}
+				{% endif %}
+			</div>
+		</div>
+		{% if user.access %}
+		<p><a href="/dashboard/registertrial" class="linkButton">Register a new trial</a></p>
+		{% else %}
+		<p>You are currently waiting approval from the CTRI Team to register clinical trials.</p>
+		{% endif %}
+		<p><a href="/dashboard/passwordreset" class="linkButton">Reset Password</a></p>
+	{% else %}
+		<h1>Please log in to access the dashboard.</h1>
+		<a href="{% url 'userauth:login' %}">Log In</a>
+	{% endif %}
+{% endblock %}
+
+

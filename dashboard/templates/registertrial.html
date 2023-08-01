@@ -1,0 +1,686 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<h1 style="margin-top: 0;">Register a new trial</h1>
+{% if user.access %}
+	<form method="POST">
+		{% csrf_token %}
+
+		{% if form.errors %}
+		<div class="alert alert-danger">
+			<strong>Error:</strong>
+			{% for field_errors in form.errors %}
+			{% for error in field_errors %}
+			{{ error }}
+			{% endfor %}
+			{% endfor %}
+		</div>
+		{% endif %}
+
+		<div class="row">
+			<div class="col-2">
+				<div class="form-section">
+					<h2>Registry Information</h2>
+					<!-- Primary Registry Details -->
+					<div class="form-group">
+						<p>{{ form.primary_registry_name.label|title }}</p>
+						{{ form.primary_registry_name.errors }}
+						{{ form.primary_registry_name }}
+					</div>
+
+					<!-- Secondary Registry Details -->
+					<div class="form-group">
+						<p>{{ form.secondary_registry_name.label|title }}</p>
+						<p class="form-caption">For multiples values, separated by commas</p>
+						{{ form.secondary_registry_name.errors }}
+						{{ form.secondary_registry_name }}
+					</div>
+					<div class="form-group">
+						<p>{{ form.secondary_registry_identifying_number.label|title }}</p>
+						<p class="form-caption">For multiples values, separated by commas</p>
+						{{ form.secondary_registry_identifying_number.errors }}
+						{{ form.secondary_registry_identifying_number }}
+					</div>
+				</div>
+
+				<div class="form-section">
+					<!-- Sources of Monetary Support -->
+					<h2>Monetary Funding Details</h2>
+					<div class="form-group">
+						<p>{{ form.source_of_monetary_or_material_support.label|title }}</p>
+						{{ form.source_of_monetary_or_material_support.errors }}
+						{{ form.source_of_monetary_or_material_support }}
+					</div>
+
+					<!-- Primary Sponsor Details -->
+					<h3>Primary Sponsor Details</h3>
+					<p class="form-caption">The individual, organization, group or other legal entity which takes responsibility for initiating, managing and/or financing a study. The Primary Sponsor is responsible for ensuring that the trial is properly registered. The Primary Sponsor may or may not be the main funder.</p>
+					<div class="form-group">
+						<p>{{ form.primary_sponsor_name.label|title }}</p>
+						{{ form.primary_sponsor_name.errors }}
+						{{ form.primary_sponsor_name }}
+					</div>
+					<div class="form-group">
+						<p>{{ form.primary_sponsor_email.label|title }}</p>
+						{{ form.primary_sponsor_email.errors }}
+						{{ form.primary_sponsor_email }}
+					</div>
+					<div class="form-group">
+						<p>{{ form.primary_sponsor_address.label|title }}</p>
+						{{ form.primary_sponsor_address.errors }}
+						{{ form.primary_sponsor_address }}
+					</div>
+
+					<!-- Secondary Sponsor Details -->
+					<h3>Secondary Sponsor Details</h3>
+					<p class="form-caption">Additional individuals, organizations, or other legal persons, if any, that have agreed with the Primary Sponsor to take on responsibilities of sponsorship.</p>
+					<ul class="form-caption">
+						<li>Take on all the responsibilities of sponsorship jointly with the primary sponsor.</li>
+						<li>Form a group with the Primary Sponsor in which the responsibilities of sponsorship are allocated among the members of the group.</li>
+						<li>Act as the Primary Sponsor's legal representative in relation to some or all of the trial sites.</li>
+					</ul>
+
+					<div class="form-group">
+						<p>{{ form.secondary_sponsor_name.label|title }}</p>
+						{{ form.secondary_sponsor_name.errors }}
+						{{ form.secondary_sponsor_name }}
+					</div>
+					<div class="form-group">
+						<p>{{ form.secondary_sponsor_email.label|title }}</p>
+						{{ form.secondary_sponsor_email.errors }}
+						{{ form.secondary_sponsor_email }}
+					</div>
+					<div class="form-group">
+						<p>{{ form.secondary_sponsor_address.label|title }}</p>
+						{{ form.secondary_sponsor_address.errors }}
+						{{ form.secondary_sponsor_address }}
+					</div>
+				</div>
+
+				<div class="form-section">
+					<!-- Post Graduate Thesis -->
+					<h2>Post Graduate Thesis</h2>
+					<div class="form-group">
+						<p>Is this a Post Graduate Thesis?</p>
+						<p class="form-caption">If so, provide details</p>
+						{{ form.post_graduate_thesis_check.errors }}
+						{{ form.post_graduate_thesis_check }}
+					</div>
+					<div class="form-group">
+						<p>{{ form.post_graduate_thesis.label|title }}</p>
+						{{ form.post_graduate_thesis.errors }}
+						{{ form.post_graduate_thesis }}
+					</div>
+				</div>
+
+				<div class="form-section">
+					<!-- Contact Details -->
+					<h2>Contact Details</h2>
+
+					<h3>Contact for Public Queries</h3>
+					<p class="form-caption">Contact details (email address, telephone number, and postal address) of the person responsible for responding to general queries, including information about current recruitment status. Please note that the provided information should be institutional rather than personal. By providing this information, the registrant consents to its potential publication on a public website. Once provided, the information cannot be redacted or anonymized due to privacy regulations such as the GDPR.</p>
+					<div class="form-group">
+						<p>{{ form.public_query_contact_name.label|title }}</p>
+						{{ form.public_query_contact_name.errors }}
+						{{ form.public_query_contact_name }}
+					</div>
+					<div class="form-group">
+						<p>{{ form.public_query_contact_phone.label|title }}</p>
+						{{ form.public_query_contact_phone.errors }}
+						{{ form.public_query_contact_phone }}
+					</div>
+					<div class="form-group">
+						<p>{{ form.public_query_contact_email.label|title }}</p>
+						{{ form.public_query_contact_email.errors }}
+						{{ form.public_query_contact_email }}
+					</div>
+					<div class="form-group">
+						<p>{{ form.public_query_contact_address.label|title }}</p>
+						{{ form.public_query_contact_address.errors }}
+						{{ form.public_query_contact_address }}
+					</div>
+
+					<h3>Contact for Scientific Queries</h3>
+					<p class="form-caption">Contact details (email address, telephone number, and postal address) of the person responsible for responding to scientific queries. Please note that the provided information should be institutional rather than personal. By providing this information, the registrant consents to its potential publication on a public website. Once provided, the information cannot be redacted or anonymized due to privacy regulations such as the GDPR.</p>
+
+					<div class="form-group">
+						<p>{{ form.scientific_query_contact_name_and_title.label|title }}</p>
+						{{ form.scientific_query_contact_name_and_title.errors }}
+						{{ form.scientific_query_contact_name_and_title }}
+					</div>
+					<div class="form-group">
+						<p>{{ form.scientific_query_contact_phone.label|title }}</p>
+						{{ form.scientific_query_contact_phone.errors }}
+						{{ form.scientific_query_contact_phone }}
+					</div>
+					<div class="form-group">
+						<p>{{ form.scientific_query_contact_email.label|title }}</p>
+						{{ form.scientific_query_contact_email.errors }}
+						{{ form.scientific_query_contact_email }}
+					</div>
+					<div class="form-group">
+						<p>{{ form.scientific_query_contact_address.label|title }}</p>
+						{{ form.scientific_query_contact_address.errors }}
+						{{ form.scientific_query_contact_address }}
+					</div>
+
+					<h3>Contact for Principal Investigator</h3>
+					<p class="form-caption">Contact details (email address, telephone number, and postal address) of the Principal Investigator of the trial. Please note that the provided information should be institutional rather than personal. By providing this information, the registrant consents to its potential publication on a public website. Once provided, the information cannot be redacted or anonymized due to privacy regulations such as the GDPR.</p>
+					<div class="form-group">
+						<p>{{ form.principal_investigator_name.label|title }}</p>
+						{{ form.principal_investigator_name.errors }}
+						{{ form.principal_investigator_name }}
+					</div>
+					<div class="form-group">
+						<p>{{ form.principal_investigator_address.label|title }}</p>
+						{{ form.principal_investigator_address.errors }}
+						{{ form.principal_investigator_address }}
+					</div>
+					<div class="form-group">
+						<p>{{ form.principal_investigator_phone.label|title }}</p>
+						{{ form.principal_investigator_phone.errors }}
+						{{ form.principal_investigator_phone }}
+					</div>
+					<div class="form-group">
+						<p>{{ form.principal_investigator_email.label|title }}</p>
+						{{ form.principal_investigator_email.errors }}
+						{{ form.principal_investigator_email }}
+					</div>
+				</div>
+
+				<div class="form-section">
+					<!-- Study Details -->
+					<h2>Study Details</h2>
+
+					<div class="form-group">
+						<p>{{ form.public_title_of_study.label|title }}</p>
+						<p class="form-caption">Title intended for the lay public in easily understood language. An informative public title will describe the participants, the intervention, the comparator and the main outcome of the study.</p>
+						{{ form.public_title_of_study.errors }}
+						{{ form.public_title_of_study }}
+					</div>
+					<div class="form-group">
+						<p>{{ form.scientific_title_of_study.label|title }}</p>
+						<p class="form-caption">Scientific title of the study as it appears in the protocol submitted for funding and ethical review, including the trial acronym if available.</p>
+						{{ form.scientific_title_of_study.errors }}
+						{{ form.scientific_title_of_study }}
+					</div>
+					<div class="form-group">
+						<p>{{ form.countries_of_recruitment.label|title }}</p>
+						<p class="form-caption">The countries from which participants will be, are being, or have been recruited at the time of registration. Separate the values with commas.</p>
+						{{ form.countries_of_recruitment.errors }}
+						{{ form.countries_of_recruitment }}
+					</div>
+					<h3>Health Condition(s) or Problem(s) Studied</h3>
+					<p class="form-caption">Primary health condition(s) or problem(s) studied, such as depression, breast cancer, or medication error. If the study is conducted in healthy human volunteers belonging to the target population of the intervention, such as preventive or screening interventions, please enter the specific health condition(s) or problem(s) being prevented.</p>
+					<div class="form-group">
+						<p>{{ form.health_conditions_studied.label|title }}</p>
+						{{ form.health_conditions_studied.errors }}
+						{{ form.health_conditions_studied }}
+					</div>
+				</div>
+
+				<div class="form-section">
+					<!-- Intervention Information -->
+					<h2>Interventions</h2>
+					<p class="form-caption">For each arm of the trial record a brief intervention name plus an intervention description.</p>
+					<p class="form-caption">If the intervention is based on one or more drugs, please use the International Nonproprietary Name for each drug if possible, instead of brand/trade names. For unregistered drugs, the acceptable options are the generic name, chemical name, or company serial number.</p>
+					<p class="form-caption">If the intervention consists of several separate treatments, please list them all in one line separated by commas. For example: "low-fat diet, exercise".</p>
+					<p class="form-caption">In controlled trials, it is important to clearly identify the control arm. The control intervention(s) refers to the interventions against which the study intervention is evaluated. Examples include placebo, no treatment, or active control. If an active control is used, please enter the name(s) of the intervention. Otherwise, use "placebo" or "no treatment" as applicable. Additionally, provide other relevant intervention details such as dose, duration, mode of administration, etc.</p>
+
+					<div class="form-group">
+						<p>{{ form.intervention_name.label|title }}</p>
+						<p class="form-caption">For drugs use generic name; for other types of interventions provide a brief descriptive name.</p>
+						<ul class="form-caption">
+							<li>For investigational new drugs without a generic name, temporary use of a chemical name, company code, or serial number is acceptable. Update the associated registered records once the generic name is established.</li>
+							<li>For non-drug interventions, provide a detailed intervention name that distinguishes it from similar interventions.</li>
+						</ul>
+						{{ form.intervention_name.errors }}
+						{{ form.intervention_name }}
+					</div>
+
+					<div class="form-group">
+						<p>{{ form.intervention_description.label|title }}</p>
+						<p class="form-caption">The intervention description should provide enough detail to differentiate between different arms of a study (e.g., comparison of different dosages of a drug) and/or among similar interventions (e.g., comparison of multiple implantable cardiac defibrillators). For drug interventions, this may include information on dosage form, dosage, frequency, and duration.</p>
+						{{ form.intervention_description.errors }}
+						{{ form.intervention_description }}
+					</div>
+				</div>
+
+				<div class="form-section">
+					<!-- Key Inclusion and Exclusion Criteria -->
+					<h2>Key Inclusion and Exclusion Criteria</h2>
+					<p class="form-caption">Please provide the inclusion and exclusion criteria for participant selection, including age and sex. Other selection criteria may pertain to clinical diagnosis and co-morbid conditions. Exclusion criteria are commonly used to ensure patient safety.</p>
+					<p class="form-caption">If the study is conducted in healthy human volunteers who do not belong to the target population (e.g., in a preliminary safety study), please enter "healthy human volunteer".</p>
+
+					<div class="form-group">
+						<p>{{ form.inclusion_criteria.label|title }}</p>
+						{{ form.inclusion_criteria.errors }}
+						{{ form.inclusion_criteria }}
+					</div>
+					<div class="form-group">
+						<p>{{ form.exclusion_criteria.label|title }}</p>
+						{{ form.exclusion_criteria.errors }}
+						{{ form.exclusion_criteria }}
+					</div>
+				</div>
+
+				<div class="form-section">
+					<!-- Study Type -->
+					<h2>Study Type</h2>
+					<div class="form-group">
+						<p>{{ form.type_of_study.label|title }}</p>
+						{{ form.type_of_study.errors }}
+						{{ form.type_of_study }}
+					</div>
+
+					<h3>Study Design</h3>
+					<div class="form-group">
+						<p>{{ form.method_of_allocation.label|title }}</p>
+						{{ form.method_of_allocation.errors }}
+						{{ form.method_of_allocation }}
+					</div>
+					<div class="form-group">
+						<p>Is Masking used?</p>
+						{{ form.masking_used.errors }}
+						{{ form.masking_used }}
+					</div>
+					<div class="form-group">
+						<p>{{ form.masking_description.label|title }}</p>
+						<p class="form-caption">If masking is used, please provide a brief description of the masking procedure.</p>
+						{{ form.masking_description.errors }}
+						{{ form.masking_description }}
+					</div>
+					<div class="form-group">
+						<p>{{ form.assignment.label|title }}</p>
+						{{ form.assignment.errors }}
+						{{ form.assignment }}
+					</div>
+					<div class="form-group">
+						<p>{{ form.purpose.label|title }}</p>
+						{{ form.purpose.errors }}
+						{{ form.purpose }}
+					</div>
+					<div class="form-group">
+						<p>{{ form.phase.label|title }}</p>
+						<p class="form-caption">If applicable</p>
+						{{ form.phase.errors }}
+						{{ form.phase }}
+					</div>
+				</div>
+
+				<div class="form-section">
+					<!-- Dates of First Enrollment -->
+					<h2>Dates of First Enrollment</h2>
+					<div class="form-group">
+						<p>{{ form.date_of_first_enrollment_india.label|title }}</p>
+						<p class="form-caption">Format: YYYY-MM-DD</p>
+						{{ form.date_of_first_enrollment_india.errors }}
+						{{ form.date_of_first_enrollment_india }}
+					</div>
+					<div class="form-group">
+						<p>{{ form.date_of_first_enrollment_global.label|title }}</p>
+						<p class="form-caption">Format: YYYY-MM-DD</p>
+						{{ form.date_of_first_enrollment_global.errors }}
+						{{ form.date_of_first_enrollment_global }}
+					</div>
+				</div>
+
+				<div class="form-section">
+					<!-- Sample Size -->
+					<h2>Sample Size and Recruitment</h2>
+
+					<h3>Sample Size Details</h3>
+					<div class="form-group">
+						<p>{{ form.target_sample_size.label|title }}</p>
+						<p class="form-caption">Number of participants that the trial plans to enroll in total. This should be completed at the time of registration and updated subsequently should changes to the target sample size be made.</p>
+						{{ form.target_sample_size.errors }}
+						{{ form.target_sample_size }}
+					</div>
+					<div class="form-group">
+						<p>{{ form.final_enrollment_sample_size.label|title }}</p>
+						<p class="form-caption">Final enrollment number actually achieved. This should include all participants actually enrolled in the trial, regardless of any attrition subsequent to enrollment. This field should be completed once the trial's recruitment phase has been completed.</p>
+						{{ form.final_enrollment_sample_size.errors }}
+						{{ form.final_enrollment_sample_size }}
+					</div>
+
+					<h3>Recruitment Status</h3>
+					<div class="form-group">
+						<p>{{ form.recruitment_status_india.label|title }}</p>
+						{{ form.recruitment_status_india.errors }}
+						{{ form.recruitment_status_india }}
+					</div>
+					<div class="form-group">
+						<p>{{ form.recruitment_status_global.label|title }}</p>
+						{{ form.recruitment_status_global.errors }}
+						{{ form.recruitment_status_global }}
+					</div>
+				</div>
+
+				<div class="form-section">
+					<!-- Site of Study -->
+					<h2>Sites of Study</h2>
+					<p class="form-caption">Please list all sites where the trial is being conducted. If the trial is being conducted at multiple sites, please list the details of each site separately using commas in the respective order.</p>
+					<div class="form-group">
+						<p>Site(s) of Study Name(s)</p>
+						{{ form.sites_of_study.errors }}
+						{{ form.sites_of_study }}
+					</div>
+					<div class="form-group">
+						<p>Site(s) of Study Phone(s)</p>
+						{{ form.sites_of_study_phone.errors }}
+						{{ form.sites_of_study_phone }}
+					</div>
+					<div class="form-group">
+						<p>Site(s) of Study Email(s)</p>
+						{{ form.sites_of_study_email.errors }}
+						{{ form.sites_of_study_email }}
+					</div>
+					<div class="form-group">
+						<p>Site(s) of Study Address(es)</p>
+						{{ form.sites_of_study_address.errors }}
+						{{ form.sites_of_study_address }}
+					</div>
+				</div>
+			</div>
+			<div class="col-2">
+				<div class="width-restriction">
+
+					<div class="form-section">
+						<!-- Outcomes -->
+						<h2>Outcomes</h2>
+						<p class="form-caption">Outcomes are events, variables, or experiences that are measured because they are believed to be influenced by the intervention.</p>
+
+						<h3>Primary Outcomes</h3>
+						<p class="form-caption">The primary outcome should be the outcome used in sample size calculations, or the main outcome(s) used to determine the effects of the intervention(s). Most trials should have only one primary outcome.</p>
+
+						<div class="form-group">
+							<p><strong>Primary Outcome 1</strong></p>
+							<p>Primary Outcome</p>
+							<p class="form-caption">Do not use abbreviations</p>
+							{{ form.primary_outcome_1.errors }}
+							{{ form.primary_outcome_1 }}
+						</div>
+						<div class="form-group">
+							<p>Metric or method used for measurement</p>
+							<p class="form-caption">Be as specific as possible</p>
+							{{ form.primary_outcome_metric_1.errors }}
+							{{ form.primary_outcome_metric_1 }}
+						</div>
+						<div class="form-group">
+							<p>{{ form.primary_outcome_timepoint_1.label|title }}</p>
+							{{ form.primary_outcome_timepoint_1.errors }}
+							{{ form.primary_outcome_timepoint_1 }}
+						</div>
+
+						<p><strong>Primary Outcome 2</strong></p>
+						<div class="form-group">
+							<p>Primary Outcome</p>
+							<p class="form-caption">Do not use abbreviations</p>
+							{{ form.primary_outcome_2.errors }}
+							{{ form.primary_outcome_2 }}
+						</div>
+						<div class="form-group">
+							<p>Metric or method used for measurement</p>
+							<p class="form-caption">Be as specific as possible</p>
+							{{ form.primary_outcome_metric_2.errors }}
+							{{ form.primary_outcome_metric_2 }}
+						</div>
+						<div class="form-group">
+							<p>{{ form.primary_outcome_timepoint_2.label|title }}</p>
+							{{ form.primary_outcome_timepoint_2.errors }}
+							{{ form.primary_outcome_timepoint_2 }}
+						</div>
+
+						<p><strong>Primary Outcome 3</strong></p>
+						<div class="form-group">
+							<p>Primary Outcome 3</p>
+							<p class="form-caption">Do not use abbreviations</p>
+							{{ form.primary_outcome_3.errors }}
+							{{ form.primary_outcome_3 }}
+						</div>
+						<div class="form-group">
+							<p>Metric or method used for measurement</p>
+							<p class="form-caption">Be as specific as possible</p>
+							{{ form.primary_outcome_metric_3.errors }}
+							{{ form.primary_outcome_metric_3 }}
+						</div>
+						<div class="form-group">
+							<p>{{ form.primary_outcome_timepoint_3.label|title }}</p>
+							{{ form.primary_outcome_timepoint_3.errors }}
+							{{ form.primary_outcome_timepoint_3 }}
+						</div>
+
+						<h3>Secondary Outcomes</h3>
+						<p class="form-caption">Secondary outcomes are outcomes which are of secondary interest or that are measured at time points of secondary interest. A secondary outcome may involve the same event, variable, or experience as the primary outcome, but measured at time points other than those of primary interest.</p>
+
+						<div class="form-group">
+							<p><strong>Secondary Outcome 1</strong></p>
+							<p>Secondary Outcome</p>
+							<p class="form-caption">Do not use abbreviations</p>
+							{{ form.secondary_outcome_1.errors }}
+							{{ form.secondary_outcome_1 }}
+						</div>
+						<div class="form-group">
+							<p>Metric or method used for measurement</p>
+							<p class="form-caption">Be as specific as possible</p>
+							{{ form.secondary_outcome_metric_1.errors }}
+							{{ form.secondary_outcome_metric_1 }}
+						</div>
+						<div class="form-group">
+							<p>{{ form.secondary_outcome_timepoint_1.label|title }}</p>
+							{{ form.secondary_outcome_timepoint_1.errors }}
+							{{ form.secondary_outcome_timepoint_1 }}
+						</div>
+
+						<p><strong>Secondary Outcome 2</strong></p>
+						<div class="form-group">
+							<p>Secondary Outcome</p>
+							<p class="form-caption">Do not use abbreviations</p>
+							{{ form.secondary_outcome_2.errors }}
+							{{ form.secondary_outcome_2 }}
+						</div>
+						<div class="form-group">
+							<p>Metric or method used for measurement</p>
+							<p class="form-caption">Be as specific as possible</p>
+							{{ form.secondary_outcome_metric_2.errors }}
+							{{ form.secondary_outcome_metric_2 }}
+						</div>
+						<div class="form-group">
+							<p>{{ form.secondary_outcome_timepoint_2.label|title }}</p>
+							{{ form.secondary_outcome_timepoint_2.errors }}
+							{{ form.secondary_outcome_timepoint_2 }}
+						</div>
+
+						<p><strong>Secondary Outcome 3</strong></p>
+						<div class="form-group">
+							<p>Secondary Outcome 3</p>
+							<p class="form-caption">Do not use abbreviations</p>
+							{{ form.secondary_outcome_3.errors }}
+							{{ form.secondary_outcome_3 }}
+						</div>
+						<div class="form-group">
+							<p>Metric or method used for measurement</p>
+							<p class="form-caption">Be as specific as possible</p>
+							{{ form.secondary_outcome_metric_3.errors }}
+							{{ form.secondary_outcome_metric_3 }}
+						</div>
+						<div class="form-group">
+							<p>{{ form.secondary_outcome_timepoint_3.label|title }}</p>
+							{{ form.secondary_outcome_timepoint_3.errors }}
+							{{ form.secondary_outcome_timepoint_3 }}
+						</div>
+
+
+					</div>
+
+					<div class="form-section">
+						<!-- Ethics Review -->
+						<h2>Ethics Review</h2>
+
+						<div class="form-group">
+							<p>{{ form.ethics_committee_approval_status.label|title }}</p>
+							{{ form.ethics_committee_approval_status.errors }}
+							{{ form.ethics_committee_approval_status }}
+						</div>
+						<div class="form-group">
+							<p>{{ form.ethics_committee_date_of_approval.label|title }}</p>
+							<p class="form-caption">Format: YYYY-MM-DD</p>
+							{{ form.ethics_committee_date_of_approval.errors }}
+							{{ form.ethics_committee_date_of_approval }}
+						</div>
+
+						<h3>Contact Details of the Ethics Committee</h3>
+						<div class="form-group">
+							<p>{{ form.ethics_committee_name.label|title }}</p>
+							{{ form.ethics_committee_name.errors }}
+							{{ form.ethics_committee_name }}
+						</div>
+						<div class="form-group">
+							<p>{{ form.ethics_committee_phone.label|title }}</p>
+							{{ form.ethics_committee_phone.errors }}
+							{{ form.ethics_committee_phone }}
+						</div>
+						<div class="form-group">
+							<p>{{ form.ethics_committee_email.label|title }}</p>
+							<p class="form-caption">As email addresses frequently change, registrants must provide a postal address for the ethics review committee contact for public queries.</p>
+							{{ form.ethics_committee_email.errors }}
+							{{ form.ethics_committee_email }}
+						</div>
+						<div class="form-group">
+							<p>{{ form.ethics_committee_address.label|title }}</p>
+							{{ form.ethics_committee_address.errors }}
+							{{ form.ethics_committee_address }}
+						</div>
+					</div>
+
+					<div class="form-section">
+						<!-- Date of Completion -->
+						<h2>Date of Completion</h2>
+						<div class="form-group">
+							<p>{{ form.date_of_study_completion.label|title }}</p>
+							<p class="form-caption">The date on which the final data for a clinical study were collected (commonly referred to as "last subject, last visit").</p>
+							<p class="form-caption">Format: YYYY-MM-DD</p>
+							{{ form.date_of_study_completion.errors }}
+							{{ form.date_of_study_completion }}
+						</div>
+					</div>
+
+					<div class="form-section">
+						<!-- Summary Results -->
+						<h2>Summary Results</h2>
+						<p class="form-caption">Within 12 months of the study completion date, trials should include, at a minimum, summary results or a link to summary results within the trial registration record.</p>
+
+						<div class="form-group">
+							<p>Date of Posting Result Summaries</p>
+							{{ form.date_of_posting_results.errors }}
+							{{ form.date_of_posting_results }}
+						</div>
+						<div class="form-group">
+							<p>Date of First Journal Publication of Results</p>
+							{{ form.date_of_first_jounal_publication.errors }}
+							{{ form.date_of_first_jounal_publication }}
+						</div>
+						<div class="form-group">
+							<p>URL hyperlink(s) related to results and publications</p>
+							<p class="form-caption">Separated by commas</p>
+							{{ form.urls_related_to_results.errors }}
+							{{ form.urls_related_to_results }}
+						</div>
+						<div class="form-group">
+							<p>Baseline Characteristics</p>
+							<p class="form-caption">Data collected at the beginning of a clinical study for all participants and for each arm or comparison group includes demographics, such as age and sex, as well as study-specific measures. Templates can be found from organizations such as ClinicalTrials.gov, the EQUATOR Network, or CONSORT.</p>
+							{{ form.baseline_characteristics.errors }}
+							{{ form.baseline_characteristics }}
+						</div>
+						<div class="form-group">
+							<p>Participant Flow</p>
+							<p class="form-caption">Information to document the progress and numbers of research participants through each stage of a study is presented in a flow diagram or tabular format. This information is often displayed in tabular format, but PDF uploads are also possible. Please share the link to the file.</p>
+							{{ form.participant_flow.errors }}
+							{{ form.participant_flow }}
+						</div>
+						<div class="form-group">
+							<p>Adverse Events</p>
+							<p class="form-caption">
+								An unfavorable change in the health of a participant, including abnormal laboratory findings, as well as all serious adverse events and deaths occurring during a clinical study or within a certain time period after the study has ended, is documented. This change may or may not be caused by the intervention being studied.</p>
+							{{ form.adverse_events.errors }}
+							{{ form.adverse_events }}
+						</div>
+						<div class="form-group">
+							<p>Outcome Measures</p>
+							<p class="form-caption">
+								A table of data is provided for each primary and secondary outcome measure, along with their respective measurement of precision (e.g., a 95% confidence interval), organized by arm or comparison group. The table includes the results of scientifically appropriate statistical analyses that were performed on the outcome measure data, if applicable.</p>
+							{{ form.outcome_measures.errors }}
+							{{ form.outcome_measures }}
+						</div>
+						<div class="form-group">
+							<p>Protocol Files</p>
+							<p class="form-caption">URL links are provided to protocol files, including their version and date. These files may include PDF documents of consent forms, statistical analysis plans, and participant information sheets.</p>
+							{{ form.protocol_files.errors }}
+							{{ form.protocol_files }}
+						</div>
+						<div class="form-group">
+							<p>Brief Summary</p>
+							{{ form.brief_summary.errors }}
+							{{ form.brief_summary }}
+						</div>
+					</div>
+
+					<div class="form-section">
+						<!-- Data Sharing Plan -->
+						<h2>Data Sharing Plan</h2>
+						<div class="form-group">
+							<p>Will individual de-identified participant data will be shared</p>
+							{{ form.data_shared.errors }}
+							{{ form.data_shared }}
+						</div>
+						<div class="form-group">
+							<p>Additional details about the data sharing plan</p>
+							<ul class="form-caption">
+								<li>Which specific data will be shared.</li>
+								<li>Whether additional trial-related documents will be shared (e.g., protocols, statistical plans, consent forms).</li>
+								<li>When the data will be made available.</li>
+								<li>The intended purpose for which the data can be used.</li>
+								<li>The mechanisms through which the data may be accessed and made available.</li>
+							</ul>
+
+							{{ form.data_sharing_plan.errors }}
+							{{ form.data_sharing_plan }}
+						</div>
+					</div>
+
+					<div class="form-section">
+						<!-- Addtional Optional Data -->
+						<h2>Additional Optional Data</h2>
+						<div class="form-group">
+							<p>Lay Summary</p>
+							<p class="form-caption">A short description of the primary purpose and background of the study is followed by a description of the included participants, interventions to be tested, and outcomes to be measured. Additionally, include a brief statement of the study hypothesis. The language used should be intended to be read and understood by the general public. Avoid duplicating information recorded in other data elements and refrain from including the entire protocol.</p>
+							{{ form.lay_summary.errors }}
+							{{ form.lay_summary }}
+						</div>
+						<div class="form-group">
+							<p>Approvals</p>
+							<p class="form-caption">The oversight entities that have approved the trial (or to which the trial has been submitted for approval) should be listed. These entities include ethics committees and regulatory authorities. For each approving entity, report the name of the entity, the date of approval, and the status of the approval.</p>
+							{{ form.approvals.errors }}
+							{{ form.approvals }}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<button type="submit">Register This Trial</button>
+
+
+	</form>
+{% else %}
+<div class="row">
+	<div class="col-2">
+		<p>Dear {{ user.first_name }} {{ user.last_name }} you are currently not approved to register trials by the CTRI Team. Kindly await the same, you may go <a href="/dashboard">back to the dashboard</a>.</p>
+	</div>
+</div>
+{% endif %}
+{% else %}
+<h1>Please log in to access the dashboard.</h1>
+<a href="{% url 'userauth:login' %}">Log In</a>
+{% endif %}
+{% endblock %}

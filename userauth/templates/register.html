@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Register</h1>
+<p>Already a user? <a href="/login">Login</a></p>
+
+<form method="post">
+	{% csrf_token %}
+
+	{% if form.errors %}
+		<div class="alert alert-danger">
+			<strong>Error:</strong>
+			{% for field_errors in form.errors %}
+				{% for error in field_errors %}
+					{{ error }}
+				{% endfor %}
+			{% endfor %}
+		</div>
+	{% endif %}
+
+	<div class="row">
+		<div class="col-2">
+			<div class="form-section">
+				<h2>Personal Details</h2>
+				<div class="form-group">
+					<p>{{ form.first_name.label }}</p>
+					{{ form.first_name }}
+					{{ form.first_name.errors }}
+				</div>
+
+				<div class="form-group">
+					<p>{{ form.last_name.label }}</p>
+					{{ form.last_name }}
+					{{ form.last_name.errors }}
+				</div>
+
+				<div class="form-group">
+					<p>{{ form.email.label }}</p>
+					{{ form.email }}
+					{{ form.email.errors }}
+				</div>
+
+				<div class="form-group">
+					<p>{{ form.mobile_number.label }}</p>
+					{{ form.mobile_number }}
+					{{ form.mobile_number.errors }}
+				</div>
+
+				<div class="form-group">
+					<p>{{ form.gender.label }}</p>
+					{{ form.gender }}
+					{{ form.gender.errors }}
+				</div>
+			</div>
+		</div>
+
+		<div class="col-2">
+			<div class="width-restriction">
+				<div class="form-section">
+					<h2>Organisation/Company Details</h2>
+					<div class="form-group">
+						<p>Organisation/Company Name</p>
+						{{ form.organisation }}
+						<p class="form-caption">If your organisation is not listed here, kindly proceed with <a href="/registerorganisation">registering a new organisation</a> first.</p>
+						{{ form.organisation.errors }}
+					</div>
+
+					<div class="form-group">
+						<p>Your Designation</p>
+						{{ form.designation }}
+						{{ form.designation.errors }}
+					</div>
+
+					<!-- <div class="form-group">
+						<p>{{ form.official_address.label }}</p>
+						{{ form.official_address }}
+						{{ form.official_address.errors }}
+					</div>
+
+					<div class="form-group">
+						<p>{{ form.country.label }}</p>
+						{{ form.country }}
+						{{ form.country.errors }}
+					</div>
+
+					<div class="form-group">
+						<p>{{ form.state.label }}</p>
+						{{ form.state }}
+						{{ form.state.errors }}
+					</div>
+
+					<div class="form-group">
+						<p>{{ form.district.label }}</p>
+						{{ form.district }}
+						{{ form.district.errors }}
+					</div> -->
+				</div>
+				<div class="form-section">
+					<h2>Set a Password</h2>
+
+					<div class="form-group">
+						<p>{{ form.password1.label }}</p>
+						{{ form.password1 }}
+						{{ form.password1.errors }}
+					</div>
+
+					<div class="form-group">
+						<p>{{ form.password2.label }}</p>
+						{{ form.password2 }}
+						{{ form.password2.errors }}
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<button type="submit">Register</button>
+
+</form>
+
+{% endblock %}

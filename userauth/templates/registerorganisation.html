@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Register a New Organisation</h1>
+<p>Organisation already registered? <a href="/register">Register New User</a></p>
+
+<form method="post">
+	{% csrf_token %}
+
+	{% if form.errors %}
+		<div class="alert alert-danger">
+			<strong>Error:</strong>
+			{% for field_errors in form.errors %}
+				{% for error in field_errors %}
+					{{ error }}
+				{% endfor %}
+			{% endfor %}
+		</div>
+	{% endif %}
+
+	<div class="row">
+		<div class="col-2">
+			<div class="form-group">
+				<p>Name of the Organisation</p>
+				{{ form.name }}
+				{{ form.name.errors }}
+			</div>
+			<div class="form-group">
+				<p>Official Address of the Organisation</p>
+				{{ form.official_address }}
+				{{ form.official_address.errors }}
+			</div>
+			<div class="form-group">
+				<p>{{ form.country.label }}</p>
+				{{ form.country }}
+				{{ form.country.errors }}
+			</div>
+			<div class="form-group">
+				<p>{{ form.state.label }}</p>
+				<p class="form-caption">If your organisation is not in India, kindly select "Not in India".</p>
+				{{ form.state }}
+				{{ form.state.errors }}
+			</div>
+			<div class="form-group">
+				<p>{{ form.district.label }}</p>
+				<p class="form-caption">If your organisation is not in India, kindly enter NA</p>
+				{{ form.district }}
+				{{ form.district.errors }}
+			</div>
+			<button type="submit">Register Organisation</button>
+		</div>
+	</div>
+
+
+	
+</form>
+
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Login</h1>
+<p>Don't have an account yet? <a href="/register">Register</a></p>
+
+<div class="notifications">
+	{% for notification in notifications %}
+		<p class="{{ notification.tags }}">{{ notification }}</p>
+	{% endfor %}
+</div>
+
+	<form method="post">
+		{% csrf_token %}
+
+		{% if form.errors %}
+			<div class="alert alert-danger">
+				<strong>Error:</strong>
+				{% for field_errors in form.errors %}
+					{% for error in field_errors %}
+						{{ error }}
+					{% endfor %}
+				{% endfor %}
+			</div>
+		{% endif %}
+
+		<div class="row">
+			<div class="col-2">
+				<div class="form-group">
+					<p>{{ form.username.label }}/Email</p>
+					{{ form.username }}
+					{{ form.username.error }}
+				</div>
+				<div class="form-group">
+					<p>{{ form.password.label }}</p>
+					<p class="form-caption"><a href="/forgotpassword">Forgot Password?</a></p>
+					{{ form.password }}
+					{{ form.password.error }}
+				</div>
+				<button type="submit">Log in</button>
+			</div>
+		</div>
+	</form>
+
+{% endblock %}

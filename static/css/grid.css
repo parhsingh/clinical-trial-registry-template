@@ -1,0 +1,71 @@
+/* Responsve screen breakpoints */
+/* Small: 0px - 600px */
+/* Medium: 601px - 910px */
+/* Large: 911px - ∞ */
+
+/* Width resitriction */
+.width-restriction {
+    width: 85%;
+	margin: 0 auto;
+}
+
+/* Columns */
+.row {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+}
+
+.col-2 {
+    grid-column: span 6;
+}
+.col-3 {
+	grid-column: span 4;
+}
+.col-4 {
+	grid-column: span 3;
+}
+
+/* Responsive column and width-restriction sizing */
+@media screen and (max-width:910px) {
+    .col-3 {
+        grid-column: span 6;
+    }
+    .col-4, .col-2 {
+        grid-column: span 12;
+    }
+    .col-4 .width-restriction, .col-2 .width-restriction {
+        width: 100%
+    }
+    .col-2 {
+        width: 100%
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .col-3 {
+        grid-column: span 12;
+    }
+    .col-3 .width-restriction {
+        width: 100%;
+    }
+}
+
+.mobile-view, .tablet-view, .large-view {
+    display: none
+}
+@media screen and (max-width: 450px) {
+    .mobile-view {
+        display: block;
+    }
+}
+@media screen and (min-width: 451px) and (max-width: 850px) {
+    .tablet-view {
+        display: block;
+    }
+}
+@media screen and (min-width: 851px) {
+    .large-view {
+        display: block;
+    }
+}

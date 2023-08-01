@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row" style="justify-content: space-between; align-items: center;">
+	<div class="col-2">
+		<h3>Welcome to the</h3>
+		<h1>Clinical Trial Registry</h1>
+		<p>Introducing the Clinical Trial Registry Template – a transformative initiative to advance medical research worldwide. Clinical trial registries are crucial for transparency, data accessibility, and safeguarding participants' rights. Aligned with WHO Guidelines defined in the <a href="https://apps.who.int/iris/bitstream/handle/10665/274994/9789241514743-eng.pdf" target="_blank">International Standards for Clinical Trial Registries</a>, this template adheres to global standards, fostering collaboration and credibility. Developed at <a href="https://www.icmr.gov.in/" target="_blank">the Indian Council of Medical Research (ICMR)</a>, it will be distributed as a public digital good at the <a href="https://www.g20.org/en/" target="_blank">G20 Summit</a>, empowering nations to implement robust registries and accelerate progress for better health outcomes with minimal cost and effort. Let's propel medical research into a new era of openness and innovation together.</p>
+	</div>
+	{% load static %}
+	<div class="col-2">
+		<div class="width-restriction" style="text-align: center; margin-top: 100px; margin-bottom: 100px;">
+			<h1>{{ trialsRegistered }}</h1>
+			<h3>Clinical Trials Registered</h3>
+			<h1>{{ organisationsRegistered }}</h1>
+			<h3>Organisations Registered</h3>
+		</div>
+	</div>
+</div>
+{% endblock %}
