@@ -25,17 +25,17 @@ class CustomUserAdmin(BaseUserAdmin):
     ordering = ('username',)
 
     # Notification Mail for Access Approval
-    def save_model(self, request, obj, form, change):
-         original_obj = self.model.objects.get(pk=obj.pk) if change else None
+    # def save_model(self, request, obj, form, change):
+        #  original_obj = self.model.objects.get(pk=obj.pk) if change else None
 
-         if original_obj and not original_obj.access and obj.access:
-             subject = 'CTR: Access Granted'
-             message = f'Dear {obj.first_name} {obj.last_name},\nYour access has been approved! You are now allowed to register clinical trials on the behalf of your organisation: {obj.organisation}.\n\nRegards,\nTeam CTR, ICMR'
-             from_email = settings.DEFAULT_FROM_EMAIL
-             recipient_list = [obj.email]
-             send_mail(subject, message, from_email, recipient_list)
+        #  if original_obj and not original_obj.access and obj.access:
+        #      subject = 'CTR: Access Granted'
+        #      message = f'Dear {obj.first_name} {obj.last_name},\nYour access has been approved! You are now allowed to register clinical trials on the behalf of your organisation: {obj.organisation}.\n\nRegards,\nTeam CTR, ICMR'
+        #      from_email = settings.DEFAULT_FROM_EMAIL
+        #      recipient_list = [obj.email]
+        #      send_mail(subject, message, from_email, recipient_list)
 	
-             super().save_model(request, obj, form, change)
+            #  super().save_model(request, obj, form, change)
 
 admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(Organisation)

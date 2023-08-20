@@ -5,10 +5,8 @@ class ClinicalTrialForm(forms.ModelForm):
     class Meta:
         model = ClinicalTrial
         fields = '__all__'
-        exclude = ['primary_registry_identifying_number', 'date_of_registration_primary_registry']
+        exclude = ['primary_registry_name', 'primary_registry_identifying_number', 'date_of_registration_primary_registry']
         widgets = {
-            'primary_registry_name': forms.Select(attrs={'placeholder': 'Select Primary Registry'}),
-                        
             'secondary_registry_name': forms.Select(attrs={'placeholder': 'Select Secondary Registry'}),
             'secondary_registry_identifying_number': forms.Textarea(attrs={'placeholder': 'Enter Secondary Registery ID(s) (UTN, Sponsor Assigned etc.)', 'rows': 3}),
 
