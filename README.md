@@ -14,13 +14,14 @@
 3. Install Django
 
 	```pip install django```
+
 4. Install ```django_extensions```
 
 	```pip install django_extensions```
 
 5. Create and run migrations
 
-	```python manage.py makemigrations```
+	```python manage.py makemigrations userauth dashboard```
 
 	```python manage.py migrate```
 
