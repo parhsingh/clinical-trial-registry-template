@@ -7,9 +7,9 @@
 
 2. Setup and run a virtual environment (inside the cloned repository)
 
-	```python3 -m venv env```
+	```python3 -m venv venv```
 
-	```source env/bin/activate```
+	```venv\Scripts\activate```
 
 3. Install Django
 

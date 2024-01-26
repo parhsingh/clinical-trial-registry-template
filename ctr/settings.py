@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'userauth',
     'dashboard',
     'search',
-    "django_extensions"
+    'django_extensions'
 ]
 
 MIDDLEWARE = [
